@@ -81,6 +81,7 @@ server.listen(5000);
 #### Of course, you can reach the full resume via a easier way, I'm not intend to conceal it. If you can't download, maybe I'm not seeking employment.
 
 ```js
+"use strict"
 const team_member = require('https');
 team_member.get( 'https://www.rustinz.com/Hire', (req,res) => {
     const {statusCode} = response;
