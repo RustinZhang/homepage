@@ -1,4 +1,4 @@
-# homepage
+# Homepage
 ## contents
 My personal website's home page.
 <a href="https://www.rustinz.com">Visit it</a>
