@@ -1,441 +1,566 @@
 //*
     //outline: 1px red solid
 
-ul, li, h1, h2, h3, p, figure
+ul, li, h1, h2, h3, p, figure, aside, header, main, nav, section, span
     margin: 0
     padding: 0
-    font-size: 1em
     box-sizing: border-box
+
 ul
     list-style: none
-a
-    color: rgb(46,138,247)
-    text-decoration: none
 
-html, body
+a
+    color: #9f8234
+    text-decoration: none
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    &:hover
+        text-decoration: underline
+
+img
+    border: 0
+
+html
     position: relative
     width: 100%
-    max-width: 1440px
-    padding: 0
+    height: 100%
+    padding-left: 5px
     margin: 0 auto
-    font-size: 1em
-    font-family: "SF Pro SC","SF Pro Text","SF Pro Icons","PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif
+    font-size: 62.5%
+    // 默认，方便计算
+    // 1rem=10px 移动端响应式布局，设计稿 640px
+    @media screen and (max-width: 375px)
+        font-size: 12px
+    @media screen and (min-width: 376px) and (max-width: 414px)
+        font-size: 14px
+    @media screen and (min-width: 415px) and (max-width: 639px)
+        font-size: 17px
+    @media screen and (min-width: 640px) and (max-width: 719px)
+        font-size: 22px
+    @media screen and (min-width: 720px) and (max-width: 749px)
+        font-size: 24.5px
+    @media screen and (min-width: 750px) and (max-width: 767px)
+        font-size: 25.5px
+    @media only screen and (max-width: 767px)
+        padding: 0
+        height: auto
+
+body
+    position: relative
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    max-width: 111vh
+    padding-left: 5px
+    margin: 0 auto
+    font-size: 1.4rem
+    overflow: hidden
+    color: rgba(255, 255, 255, .30)
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Micro Hei, Arial, sans-serif
+    background: url("../images/pc/bg.png") 0 0 no-repeat fixed
+    background-size: cover
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-    @media only screen and (min-width: 1441px)
-        border-left: 1px solid rgb(245,245,245)
-        border-right: 1px solid rgb(245,245,245)
+    -webkit-text-size-adjust: 100% !important
+    @media only screen and (max-width: 767px)
+        padding: 0
+        height: auto
+        font-size: 1rem
+        overflow-x: hidden
+        overflow-y: scroll
+
+.content
+    position: relative
+    width: 100%
+    overflow-x: hidden
+    margin-left: 0
+    -webkit-transition: 0.3s
+    -moz-transition: 0.3s
+    -ms-transition: 0.3s
+    -o-transition: 0.3s
+    transition: 0.3s
+    @media only screen and (min-width: 768px)
+        position: static
+        width: auto
+        float: none
+        height: auto
+        overflow: hidden
 
 .block-scroll
-    height: 100%
-    overflow: hidden
+    height: 100vh
+    overflow-y: hidden
+
 .nav
     position: fixed
     top: 0
+    left: 0
     width: 100%
-    max-width: 1440px
-    height: 2.5em
+    height: 7.4vh
     color: #fff
-    background: rgba(0,0,0,.8)
+    background: rgba(0, 0, 0, .5)
     z-index: 999
-    -webkit-transition: 0.5s
-    -moz-transition: 0.5s
-    -ms-transition: 0.5s
-    -o-transition: 0.5s
-    transition: 0.5s
     @media only screen and (max-width: 767px)
+        display: none
+    .nav-menu
         position: relative
-    @media only screen and (min-width: 1441px)
-        border-left: 1px solid rgba(0,0,0,.8)
-        border-right: 1px solid rgba(0,0,0,.8)
-    .anchor
-        position: absolute
-        left: 8.68%
-        width: 33%
+        width: 112vh
+        margin: 0 auto
+        height: 7.4vh
         @media only screen and (max-width: 767px)
             display: none
+    .anchor
+        position: absolute
+        left: -6vh
+        width: 58.33vh
+        font-size: 1.8rem
+        line-height: 7.4vh
         li
-            display: inline-block
+            float: left
             text-align: center
-            line-height: 2.5em
-            width: 23%
+            line-height: 7.4vh
+            width: 33%
+            color: rgb(255, 255, 255)
+            opacity: 0.3
+            transition: 0.3s
             &:hover
                 text-decoration: underline
-            a
+                cursor: pointer
                 color: #fff
-    .weather
-        position: absolute
-        right: 5%
-        z-index: 999
-        li
-            display: inline-block
-            height: 100%
-            line-height: 2.5em
-            @media only screen and (max-width: 767px)
-                font-size: 0.8em
-                line-height: 3em
-        .temper
-             padding-left: 3em
-             background-repeat: no-repeat
-             background-size: contain
 
-// for viewpoint <=767px
-.anchor-mobile
-    position: absolute
-    box-sizing: border-box
-    display: none
+.nav-mobile
+    position: fixed
     top: 0
-    left: 0
-    width: 100vw
+    left: 100%
+    width: 21.8rem
     height: 100vh
-    padding-top: 0
-    opacity: 0
-    color: #000
-    background: #000
-    overflow: hidden
-    z-index: 2
-    -webkit-transition: 0.5s
-    -moz-transition: 0.5s
-    -ms-transition: 0.5s
-    -o-transition: 0.5s
-    transition: 0.5s
-    @media only screen and (max-width: 767px)
-        display: block
-        height: 0
-    li
-        margin: 0 10%
-        width: 80%
-        border-bottom: 1px solid rgb(51,51,51)
-        line-height: 3em
-        color: #fff
-        &:hover
-            cursor: pointer
-            color: #bbb
-// nav button origin for viewpoint<=767px
-.ext-above
-    position: absolute
+    padding-top: 0.8rem
+    background-color: #fff
+    -webkit-box-shadow: inset 3px 0 6px rgba(0, 0, 0, .5)
+    -moz-box-shadow: inset 3px 0 6px rgba(0, 0, 0, .5)
+    box-shadow: inset 3px 0 6px rgba(0, 0, 0, .5)
+    z-index: 900
+    -webkit-transition: 0.3s
+    -moz-transition: 0.3s
+    -ms-transition: 0.3s
+    -o-transition: 0.3s
+    transition: 0.3s
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    @media only screen and (min-width: 768px)
+        display: none
+    .nav-menu-mobile
+        li
+            font-size: 1.5rem
+            padding-left: 1.9rem
+            color: #191a21
+            line-height: 5rem
+            &:active
+                background: #ddd
+
+.menu-button
     display: none
-    top: 0.5em
-    left: 0.8em
-    width: 20px
-    height: 20px
-    -webkit-transition: 0.5s
-    -moz-transition: 0.5s
-    -ms-transition: 0.5s
-    -o-transition: 0.5s
-    transition: 0.5s
-    z-index: 3
     @media only screen and (max-width: 767px)
         display: block
-.ext-below
-    @extend .ext-above
-   
-.above-span
-    position: absolute
+        position: absolute
+        top: 2.25rem
+        left: -3.4rem
+        cursor: pointer
+        vertical-align: top
+        img
+            width: 2rem
+            height: 2rem
+
+.information-page
+    position: relative
     display: none
-    width: 18px
-    height: 1px
-    left: 1px
-    top: 6px
-    background: #fff
-    -webkit-transition: 0.5s
-    -moz-transition: 0.5s
-    -ms-transition: 0.5s
-    -o-transition: 0.5s
-    transition: 0.5s
-    z-index: 3
+    box-sizing: border-box
+    height: 92.6vh
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
     @media only screen and (max-width: 767px)
-        display: block
-.below-span
-    @extend .above-span
-    top: 12px
-// nav menu button when menu is active
-.active-ext-above
-    -webkit-transform: rotate(45deg)
-    -moz-transform: rotate(45deg)
-    -ms-transform: rotate(45deg)
-    -o-transform: rotate(45deg)
-    transform: rotate(45deg)
-.active-ext-below
-    -webkit-transform: rotate(135deg)
-    -moz-transform: rotate(135deg)
-    -ms-transform: rotate(135deg)
-    -o-transform: rotate(135deg)
-    transform: rotate(135deg)
-.active-above-span
-    -webkit-transform: translateY(4px)
-    -moz-transform: translateY(4px)
-    -ms-transform: translateY(4px)
-    -o-transform: translateY(4px)
-    transform: translateY(4px)
-.active-below-span
-    -webkit-transform: translateY(-3px)
-    -moz-transform: translateY(-3px)
-    -ms-transform: translateY(-3px)
-    -o-transform: translateY(-3px)
-    transform: translateY(-3px)
-.show-menu
-    height: 100vh
-    padding-top: 4em
-    opacity: 1
-    color: #fff
-    border-top: 1px solid #000
+        padding-left: 1.5rem
+        height: 100vh
+        width: 100%
+        background: url("../images/phone/bg_phone.png") 0 0
+        background-size: cover
+        -webkit-background-size: cover
+
 .head
     position: relative
     box-sizing: border-box
-    width: 100%
-    height: 8em
-    border-bottom: 1px solid rgb(230,229,230)
-    margin-top: 2.5em
+    top: 24.44vh
     @media only screen and (max-width: 767px)
-        height: 6em
-        margin: 0
+        top: 19.3rem
+    .occupation
+        font-size: 1.8rem
+        line-height: 1
+        margin-bottom: 2.77vh
+        @media only screen and (max-width: 767px)
+            font-size: 1rem
+            line-height: 1
+            margin-bottom: 1.5rem
     .name
-        padding: 0 0 0 10%
-        line-height: 3.5em
-        font-size: 2.3em
+        font-size: 4.8rem
+        color: #fff
+        line-height: 4.44vh
+        margin-bottom: 2.77vh
         @media only screen and (max-width: 767px)
-            padding: 0 5% 0 5%
-            line-height: 3em
-            font-size: 2em
-.introduce
-    @extend .head
-    height: auto
-    padding-bottom: 1em
-    margin: 0
-    p
-        max-width: 1129px
-        padding: 0 5% 0 14%
-        text-align: left
-        font-size: 0.95em
-        @media only screen and (max-width: 767px)
-            padding: 0 5% 0 5%
-            font-size: 0.9em
-.curtain-title
-    margin: 0 0 0 10%
-    line-height: 2.5em
-    font-size: 1.5em
-    @media only screen and (max-width: 767px)
-        margin: 0.7em 0 0.7em 5%
-        padding-left: 5px
-        line-height: 1.1em
-        border-left: 2px solid
-.main
-    margin-bottom: 2em
-    @media only screen and (max-width: 767px)
-        margin-bottom: 1em
-.projects-container
-    @extend .head
-    height: auto
-    margin: 0
-    padding-bottom: 1em
-    @media only screen and (max-width: 767px)
-        padding-bottom: 0.5em
-.project
-    position: relative
-    margin-left: 10%
-    background: rgb(248,248,250)
-    margin-bottom: 1em
-    padding-bottom: 1em
-    @media only screen and (max-width: 767px)
-        margin: 0 2% 1.5em 2%
-        padding: 0.5em 0 0.3em 0
-.project-title
-    margin-left: 5%
-    line-height: 2.5em
-    font-size: 1.1em
-    @media only screen and (max-width: 767px)
-        margin: 0.5em 0 1.7em 5%
-        line-height: 1em
-    a
-        color: #000
-        &:hover
-            text-decoration: underline
-
-.fa
-    margin-left: 10px
-
-.project-tech-stack ,.project-brief
-    position: relative
-    padding: 0 0 1em 2%
-    margin: 0 0 1em 5%
-    background: #fff
-    @media only screen and (max-width: 767px)
-        padding: 0 0 0.5em 0
-        margin: 0 0 0.5em 2%
-        width: 96%
-    h3
-        padding: 1em 0 0.5em 2%
-        line-height: 1em
-        font-size: 1.1em
-        @media only screen and (max-width: 767px)
-            padding: 0.6em 0 0.3em 3%
-    p
-        max-width: 889px
-        padding: 0 5% 0 3.5%
-        text-align: left
-        font-size: 0.9em
-        @media only screen and (max-width: 767px)
-            padding: 0 3% 0 3%
-.project-detail
-    @extend .project-tech-stack
-    h3
-        padding-left: 2%
-        line-height: 1.1em
-        @media only screen and (max-width: 767px)
-            padding-left: 3%
-    p
-        max-width: 889px
-        padding: 0 5% 0 3.5%
-        margin: 1em 0 1.5em 0
-        text-align: justify
-        text-indent: 2em
-        @media only screen and (max-width: 767px)
-            padding: 0 3% 0 3%
-            text-indent: 0
-.project-figure
-    max-width: 800px
-    margin: 1em 5% 1em 3.5%
-    font-size: 0.85em
-    @media only screen and (max-width: 767px)
-        margin: 1em 3% 1em 3%
+            font-size: 2.4rem
+            line-height: 1
+            margin-bottom: 1.3rem
     img
-        width: 100%
-    figcaption
-        text-align: center
-.text-box
-    overflow: hidden
-    height: 0
-.code
-    position: relative
-    left: 6%
-    overflow-x: scroll
-    max-width: 390px
-    background: rgb(248,248,250)
-    @media only screen and (max-width: 767px)
-        left: 2%
-        width: 96%
-        max-width: inherit
-.project-detail header span
-    position: absolute
-    left: 10%
-    top: 1.5em
-    font-size: .82em
-    cursor: pointer
-    color: rgb(46,138,247)
-    @media only screen and (max-width: 767px)
-        left: auto
-        right: 5%
-        top: 1em
-    &:hover
-        text-decoration: underline
-.roll
-    bottom: 1em
-    cursor: pointer
-    font-size: 0.82em !important
-    color: rgb(46,138,247)
-    text-align: right !important
-    &:hover
-        text-decoration: underline
-.jump
-    position: absolute
-    right: 10%
-    top: 15px
-    font-size: 0.82em
-    @media only screen and (max-width: 767px)
-        left: 3%
-        top: 3em
-    a
-        position: relative
-        margin: 0 1em 0 1em
+        margin-right: 4px
+        vertical-align: middle
         @media only screen and (max-width: 767px)
-            margin: 0 0.5em 0 0.5em
-        &:hover
-            text-decoration: underline
-    img
-        position: absolute
-        display: none
-        top: -15em
-        left: -42%
+            width: 1rem
+            height: 1rem
     span
+        margin-right: 30px
+        @media only screen and (max-width: 767px)
+            display: block
+            margin-bottom: 1.5rem
+            line-height: 0
+
+.introduce
+    position: absolute
+    top: 43.518vh
+    @media only screen and (max-width: 767px)
+        top: 31.3rem
+    .curtain-title
+        font-size: 1.8rem
+        margin-bottom: 1.574vh
+        @media only screen and (max-width: 767px)
+            font-size: 1.3rem
+            line-height: 1
+            margin-bottom: .85rem
+    p
+        line-height: 3.7vh
+        text-align: left
+        @media only screen and (max-width: 767px)
+            line-height: 1.8rem
+
+.footer
+    position: absolute
+    bottom: 4.629vh
+    left: 50%
+    transform: translate(-50%)
+    @media only screen and (max-width: 767px)
+        top: 48.2rem
+
+.projects-container, .path
+    position: absolute
+    display: none
+    box-sizing: border-box
+    left: 19.44vh
+    top: 7.4vh
+    width: 665px
+    height: 90vh
+    margin-bottom: 2vh
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    z-index: 2
+    @media only screen and (max-width: 767px)
         position: relative
-        margin: 0 1em 0 1em
-        cursor: pointer
-        color: rgb(46,138,247)
+        top: 0
+        left: 0
+        width: 100%
+        height: auto
+        margin: 0
+        padding: 0 1.5em 2em 1.5rem
+        background-color: #1c1d1d
+
+.project, .stuff
+    position: absolute
+    display: none
+    width: 100%
+    top: 12.037vh
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    z-index: 10
+    @media only screen and (max-width: 767px)
+        position: relative
+        display: block
+        width: 100%
+        height: auto
+        top: 0
+        left: 0
+        margin-bottom: 5rem
+
+.count
+    display: block
+    padding: 2.3rem 0 2.8rem 0
+    font-size: 1.8rem
+    color: #fff
+    line-height: 1
+    @media only screen and (min-width: 768px)
+        display: none
+
+.project-title, .stuff-title
+    color: #fff
+    font-size: 3.6rem
+    line-height: 3.333vh
+    width: 100%
+    margin-bottom: 9vh
+    @media only screen and (max-width: 767px)
+        font-size: 1.8rem
+        margin-bottom: 3rem
+        line-height: 1
+    span
+        margin-left: 1.5rem
+    img
+        vertical-align: middle
+        margin-right: 1rem
+        margin-bottom: 5px
+        @media only screen and (max-width: 767px)
+            height: 1.8rem
+    a
+        color: #fff
+
+.jump
+    line-height: 1.3vh
+    margin-bottom: 5.555vh
+    @media only screen and (max-width: 767px)
+        line-height: 1
+        margin-bottom: 3rem
+    a
+        margin-right: 3.704vh
+        @media only screen and (max-width: 767px)
+            margin-right: 1.5rem
+    .phone
+        position: relative
+        color: #9f8234
         @media only screen and (max-width: 767px)
             display: none
         &:hover
             text-decoration: underline
+            .qcode
+                display: block
+        .qcode
+            position: absolute
+            top: -18vh
+            left: 50%
+            transform: translateX(-50%)
+            display: none
+            width: 16.666vh
+            height: 16.666vh
+            background: rgba(255, 255, 255, .1)
+            border: rgba(255, 255, 255, .8)
+            border-radius: 4px
             img
-                display: inline-block
-.path
-    @extend .projects-container
-    >p
-        max-width: 1129px
-        margin: 0 0 1.5em 0
-        padding: 0 5% 0 14%
+                position: absolute
+                left: 1.11vh
+                top: 1.11vh
+                width: 14.444vh
+                height: 14.444vh
+
+.project-tech-stack, .project-brief, .project-detail, .stuff-brief, .stuff-detail
+    h3
+        font-size: 1.8rem
+        line-height: 100%
+        color: #fff
+        padding-left: 5px
+        margin-bottom: 1.574vh
+        border-left: 1px solid
+        @media only screen and (max-width: 767px)
+            font-size: 1.3rem
+            border-left: 1px solid
+            padding-left: .9rem
+            margin-bottom: 1.2rem
+    p
+        line-height: 3.7vh
+        margin-bottom: 4.352vh
+        width: 100%
         text-align: justify
-        text-indent: 2em
-        font-size: 0.9em
+        padding-right: 10px
         @media only screen and (max-width: 767px)
-            padding: 0 7% 0 7%
-            text-indent: 0
+            line-height: 2rem
+            margin-bottom: 2.75rem
+            padding-right: 0
+    li
+        line-height: 3.7vh
+        @media only screen and (max-width: 767px)
+            line-height: 2rem
 
-.stuff
-    @extend .project
-.stuff-title
-    @extend .project-title
-    i
-        margin-left: 4px
+.text-box
+    height: 13.5vh
+    overflow: hidden
+    margin-bottom: 2vh
     @media only screen and (max-width: 767px)
-        margin-bottom: 0.8em
-.stuff-brief
-    @extend .project-brief
-    h3
-        padding: 1em 0 0.5em 2%
-        line-height: 1em
-        font-size: 1.1em
-        @media only screen and (max-width: 767px)
-            padding-left: 3%
+        height: 12.4rem
+        margin-bottom: 5rem
     p
-        max-width: 889px
-        padding: 0 5% 0 3.5%
-        text-align: left
-        @media only screen and (max-width: 767px)
-            padding: 0 3% 0 3%
-.stuff-detail
-    @extend .project-detail
-    h3
-        padding: 1em 0 0 1em
-        line-height: 1em
-        font-size: 1.1em
-        @media only screen and (max-width: 767px)
-            padding-left: 3%
-    .stuff-entry
-        padding: 0 5% 0 3%
-        margin: 10px 0 10px 0
-        max-width: 889px
-        font-size: 0.9em
-        @media only screen and (max-width: 767px)
-            padding: 0 3% 0 3%
-        .stuff-size
-            float: right
-            font-size: 0.85em
-        a:hover
-             text-decoration: underline
-.contact, .footer
-    text-align: center
-    margin-bottom: 5px
-    @media only screen and (max-width: 767px)
-        font-size: 0.85em
-    p
-        padding: 0
         margin: 0
-        a
-            color: #000
-            text-decoration: underline
-        i
-            margin-right: 5px
-.show-text
-    height: auto !important
+        text-align: justify
+        padding-right: 17px
+        @media only screen and (max-width: 767px)
+            padding-right: .5rem
+    figure
+        width: 100%
+        margin: 10px 5px
+        @media only screen and (max-width: 767px)
+            margin: .5rem 0
+        img
+            width: 98%
+        figcaption
+            text-align: center
+            font-size: 12px
+            @media only screen and (max-width: 767px)
+                font-size: .75rem
 
-        
+.code
+    overflow-y: hidden
+    overflow-x: scroll
+
+.toggle-text
+    position: absolute
+    right: 15px
+    bottom: -6px
+    z-index: 5
+    @media only screen and (max-width: 767px)
+        right: .75rem
+        bottom: -2rem
+    &:hover
+        cursor: pointer
+        color: #fff
+
+.stuff-size
+    float: right
+    margin-right: 15px
+    @media only screen and (max-width: 767px)
+        margin-right: .5rem
+
+.show
+    display: block !important
+
+.show-text
+    top: -44.5vh !important
+    @media only screen and (max-width: 767px)
+        top: auto !important
+
+.expand
+    height: 74vh
+    overflow-y: scroll
+    overflow-x: hidden
+    color: #fff
+    @media only screen and (max-width: 767px)
+        height: auto
+        overflow: hidden
+
+.entry-choose
+    position: absolute
+    top: 31.666vh
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    @media only screen and (max-width: 767px)
+        display: none !important
+
+.entry-chosen
+    font-size: 2.4rem
+    line-height: 1
+    color: rgb(255, 255, 255)
+    opacity: 0.3
+    margin-bottom: 10.925vh
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    &:hover
+        cursor: pointer
+
+.proj-ch
+    display: none
+
+.path-ch
+    display: none
+
+.nav-chosen
+    opacity: 1 !important
+
+.on-top
+    transform: scale(2) translateZ(0)
+    opacity: 1
+
+.flip-over
+    position: absolute
+    top: 70.83vh
+    @media only screen and (max-width: 767px)
+        top: 41rem
+        left: 1.5rem
+    &:hover
+        cursor: pointer
+        color: #fff
+
+.flip-over-learn
+    position: absolute
+    top: 84vh
+    left: -18.6vh
+    &:hover
+        cursor: pointer
+        color: #fff
+    @media only screen and (max-width: 767px)
+        position: absolute
+        top: auto
+        left: auto
+        right: 2rem
+        bottom: 2.5rem
+
+.show-article
+    -webkit-animation-name: show-article
+    -moz-animation-name: show-article
+    -o-animation-name: show-article
+    animation-name: show-article
+    -webkit-animation-duration: 0.5s
+    -moz-animation-duration: 0.5s
+    -o-animation-duration: 0.5s
+    animation-duration: 0.5s
+    -webkit-animation-timing-function: ease-in-out
+    -moz-animation-timing-function: ease-in-out
+    -o-animation-timing-function: ease-in-out
+    animation-timing-function: ease-in-out
+
+.show-counts
+    -webkit-animation-name: show-counts
+    -moz-animation-name: show-counts
+    -o-animation-name: show-counts
+    animation-name: show-counts
+    -webkit-animation-duration: 0.5s
+    -moz-animation-duration: 0.5s
+    -o-animation-duration: 0.5s
+    animation-duration: 0.5s
+    -webkit-animation-timing-function: ease-in-out
+    -moz-animation-timing-function: ease-in-out
+    -o-animation-timing-function: ease-in-out
+    animation-timing-function: ease-in-out
+
+.show-menu
+    -webkit-transform: translateX(-21.8rem)
+    -moz-transform: translateX(-21.8rem)
+    -ms-transform: translateX(-21.8rem)
+    -o-transform: translateX(-21.8rem)
+    transform: translateX(-21.8rem)
+
+@keyframes show-article
+    0%
+        -webkit-transform: translate3d(100vw, 0, 0)
+        -moz-transform: translate3d(100vw, 0, 0)
+        -ms-transform: translate3d(100vw, 0, 0)
+        -o-transform: translate3d(100vw, 0, 0)
+        transform: translate3d(100vw, 0, 0)
+    100%
+        -webkit-transform: translateX(0)
+        -moz-transform: translateX(0)
+        -ms-transform: translateX(0)
+        -o-transform: translateX(0)
+        transform: translateX(0)
+
+@keyframes show-counts
+    0%
+        -webkit-transform: translate3d(0, 100vh, 0)
+        -moz-transform: translate3d(0, 100vh, 0)
+        -ms-transform: translate3d(0, 100vh, 0)
+        -o-transform: translate3d(0, 100vh, 0)
+        transform: translate3d(0, 100vh, 0)
+    100%
+        -webkit-transform: translateX(0)
+        -moz-transform: translateX(0)
+        -ms-transform: translateX(0)
+        -o-transform: translateX(0)
+        transform: translateX(0)
+
+

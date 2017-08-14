@@ -3,9 +3,11 @@
  * 使用 IndexUI 类实现，其中两个静态方法只是作为工具使用，除了属于主页逻辑，与其它方法关系不大
  */
 /**
+ * index模块，由IndexUI一个类构成，详见该类
+ * @module index
  * @see module: ajax
  */
-"use strict";
+'use strict';
 
 var _from = require('babel-runtime/core-js/array/from');
 
@@ -31,10 +33,88 @@ var IndexUI = function () {
         var _this = this;
 
         (0, _classCallCheck3.default)(this, IndexUI);
+        this.itemChoose = function( event ) {
+            if ( event.target.tagName === 'LI' && !event.target.classList.contains( 'on-top' ) ) {
+                var item = document.querySelector( '#' + event.target.classList[ 0 ] );
+                if ( event.target.parentNode.classList.contains( 'proj-ch' ) ) {
+                    var ele = document.querySelector( '.proj-ch .on-top' );
+                    var article = document.querySelector( '.project.show' );
+                    ele.classList.remove( 'on-top' );
+                    article.classList.remove( 'show' );
+                    article.classList.remove( 'show-counts' );
+                }
+                else if ( event.target.parentNode.classList.contains( 'path-ch' ) ) {
+                    var _ele = document.querySelector( '.path-ch .on-top' );
+                    var _article = document.querySelector( '.stuff.show' );
+                    _ele.classList.remove( 'on-top' );
+                    _article.classList.remove( 'show' );
+                    _article.classList.remove( 'show-counts' );
+                }
+                event.target.classList.add( 'on-top' );
+                item.classList.add( 'show' );
+                item.classList.add( 'show-counts' );
+            }
+        };
+        this.pageChoose = function( e ) {
+            if ( e.target.tagName === 'LI' ) {
+                _this.showPage( e.target.id );
+            }
+        };
+        this.bottomFlip = function( e ) {
+            switch ( e.target.className ) {
+                case 'flip-over':
+                    _this.showPage( 'page1' );
+                    break;
+                case 'flip-over-learn':
+                    _this.showPage( 'page2' );
+                    break;
+            }
+        };
+        this.showDetail = function( ele, idx ) {
+            ele.addEventListener( 'click', function( e ) {
+                if ( window.innerWidth < 768 ) {
+                    window.scrollBy( 0, -parseInt( window.getComputedStyle( _this.texts[ idx ] ).getPropertyValue( 'height' ) ) );
+                }
+                _this.projects[ idx ].classList.toggle( 'show-text' );
+                if ( _this.projects[ idx ].classList.contains( 'show-text' ) ) {
+                    _this.texts[ idx ].classList.toggle( 'expand' );
+                    _this.toggles[ idx ].innerHTML = '<<收起';
+                }
+                else {
+                    _this.texts[ idx ].classList.toggle( 'expand' );
+                    _this.toggles[ idx ].innerHTML = '>>更多';
+                }
+            } );
+        };
+        this.drawerControl = function() {
+            if ( !_this.content.classList.contains( 'block-scroll' ) ) {
+                _this.content.classList.add( 'show-menu' );
+                _this.mob.classList.add( 'show-menu' );
+                _this.content.classList.add( 'block-scroll' );
+            }
+            else {
+                _this.content.classList.remove( 'show-menu' );
+                _this.mob.classList.remove( 'show-menu' );
+                _this.content.classList.remove( 'block-scroll' );
+            }
+        };
 
         this.slim = function () {
             if (innerWidth > 767) {
-                _this.navClsTgl('remove');
+                _this.content.classList.remove( 'show-menu' );
+                _this.mob.classList.remove( 'show-menu' );
+                _this.content.classList.remove( 'block-scroll' );
+                switch ( _this.status[ 0 ].id ) {
+                    case 'info':
+                        _this.showPage( 'page0' );
+                        break;
+                    case 'project_item':
+                        _this.showPage( 'page1' );
+                        break;
+                    case 'learn':
+                        _this.showPage( 'page2' );
+                        break;
+                }
                 window.removeEventListener('resize', _this.slim);
                 window.addEventListener('resize', _this.fat);
             }
@@ -46,90 +126,169 @@ var IndexUI = function () {
                 window.addEventListener('resize', _this.slim);
             }
         };
-
-        this.scroll = function (e) {
+        this.mobSelect = function( e ) {
+            var target = document.querySelector( '#' + e.target.classList[ 0 ] );
             if (e.target.tagName === 'LI') {
-                _this.navClsTgl('remove');
-                document.querySelector('' + e.target.className).scrollIntoView();
+                if ( !target.classList.contains( 'show' ) ) {
+                    var last = _this.status.shift();
+                    last.classList.remove( 'show' );
+                    last.classList.remove( 'show-article' );
+                    target.classList.add( 'show' );
+                    _this.status.push( target );
+                    window.scrollTo( 0, 0 );
+                }
+            }
+            _this.drawerControl();
+        };
+        this.fixSafariScrolling = function() {
+            if ( window.innerWidth < 768 ) {
+                _this.content.style.overflowY = 'hidden';
+                setTimeout( function() {
+                    _this.content.style.overflowY = 'scroll';
+                }, 0 );
             }
         };
-
-        this.navClick = function () {
-            if (_this.ext_above.classList.contains('active-ext-above')) _this.navClsTgl('remove');else _this.navClsTgl('add');
-        };
-
-        this.showDetail = function (ele, idx) {
-            ele.addEventListener('click', function (e) {
-                if (e.target.classList.contains('roll')) // 避免点击'收起'时因文章过长位置过于靠下
-                    window.scrollBy(0, -parseInt(window.getComputedStyle(_this.texts[idx]).getPropertyValue("height")));
-                _this.texts[idx].classList.toggle('show-text');
-                if (_this.texts[idx].classList.contains('show-text')) {
-                    _this.rolls[idx].style.display = 'block';
-                    _this.toggles[idx].innerHTML = "收起总结";
-                } else {
-                    _this.rolls[idx].style.display = "none";
-                    _this.toggles[idx].innerHTML = "查看总结";
-                }
-            });
-        };
-
-        this.toggles = (0, _from2.default)(document.querySelectorAll('.toggle')); // Edge 的 forEach 不支持类数组，转换成数组或许也有性能上的优势
+        this.toggles = (0, _from2.default)( document.querySelectorAll( '.toggle-text' ) ); // Edge 的 forEach 不支持类数组，转换成数组或许也有性能上的优势
         this.texts = (0, _from2.default)(document.querySelectorAll('.text-box')); // Array.from 兼容性很差，必须要 Babel 的 'transfer-runtime' 插件
-        this.rolls = (0, _from2.default)(document.querySelectorAll('.roll'));
-        this.ext_below = document.querySelector('.ext-below');
-        this.ext_above = document.querySelector('.ext-above');
-        this.in_below = document.querySelector('.below-span');
-        this.in_above = document.querySelector('.above-span');
-        this.menu = document.querySelector('.anchor-mobile');
+        this.proj_container = document.querySelector( '#project_item' );
+        this.learn_path = document.querySelector( '#learn' );
+        this.info_page = document.querySelector( '.information-page' );
+        this.flip = document.querySelector( '.flip-over' );
+        this.entry_choose = document.querySelector( '.entry-choose' );
+        this.anchor = document.querySelector( '.anchor' );
+        this.projects = (0, _from2.default)( document.querySelectorAll( '.project' ) );
+        this.stuff = (0, _from2.default)( document.querySelectorAll( '.stuff' ) );
         this.nav = document.querySelector('.nav');
         this.weather = document.querySelector('.weather');
         this.html = document.querySelector('html');
+        this.proj_list = document.querySelector( '.proj-ch' );
+        this.learn_list = document.querySelector( '.path-ch' );
+        this.proj_entries = (0, _from2.default)( document.querySelectorAll( '.proj-ch .entry-chosen' ) );
+        this.learn_entries = (0, _from2.default)( document.querySelectorAll( '.path-ch .entry-chosen' ) );
+        this.status = [ this.info_page ];
+        this.mob_drawer = document.querySelector( '.menu-button' );
+        this.content = document.querySelector( '.content' );
+        this.mob_nav = document.querySelector( '.nav-menu-mobile' );
+        this.flip_learn = document.querySelector( '.flip-over-learn' );
+        this.mob = document.querySelector( '.nav-mobile' );
     }
 
     /**
      * 天气请求的回调函数
+     * 目前首页暂时去掉了天气版块
      * @param data {string|buffer}, 服务端返回的数据
      * @TODO 待优化，与服务端配合使用 buffer
      */
 
 
     (0, _createClass3.default)(IndexUI, [{
-        key: 'navClsTgl',
+        key: 'showPage',
 
 
         /**
-         * 负责移动端页面导航菜单的展开闭合逻辑
-         * @param change {string} chang='add'|'remove'
+         * 切换二级标题的逻辑控制函数
+         * @param id {string} 标记页码的id
+         * @returns {*} 无返回值
          */
-        value: function navClsTgl(change) {
-            this.ext_above.classList[change]('active-ext-above');
-            this.ext_below.classList[change]('active-ext-below');
-            this.in_above.classList[change]('active-above-span');
-            this.in_below.classList[change]('active-below-span');
-            this.menu.classList[change]('show-menu');
-            document.body.classList[change]('block-scroll');
-            this.html.classList[change]('block-scroll');
-            this.nav.style.backgroundColor = change === 'add' ? 'rgba(0,0,0,1)' : 'rgba(0,0,0,0.8)';
-            this.weather.style.display = change === 'add' ? 'none' : 'block';
+        value: function showPage( id ) {
+            var _this2 = this;
+            if ( window.innerWidth >= 768 ) {
+                if ( document.querySelector( '#' + id ).classList.contains( 'nav-chosen' ) ) return void 0;
+                document.querySelector( '.nav-chosen' ).classList.remove( 'nav-chosen' );
+            }
+            this.status.shift();
+            (0, _from2.default)( document.querySelectorAll( '.projects-container.show,.information-page.show,.path.show,.proj-ch.show,.path-ch.show' ) ).forEach( function( e ) {
+                e.classList.remove( 'show' ); // IE not support multiple classes one time
+                e.classList.remove( 'show-counts' );
+                e.classList.remove( 'show-article' );
+            } );
+            (0, _from2.default)( document.querySelectorAll( '.show-counts' ) ).forEach( function( e ) {
+                e.classList.remove( 'show-counts' );
+            } );
+            switch ( id ) {
+                case 'page0':
+                    this.status.push( this.info_page );
+                    this.status[ 0 ].classList.add( 'show' );
+                    this.status[ 0 ].classList.add( 'show-article' );
+                    page0.classList.add( 'nav-chosen' );
+                    break;
+                case 'page1':
+                    page1.classList.add( 'nav-chosen' );
+                    this.status.push( this.proj_container );
+                    if ( window.innerWidth >= 768 ) {
+                        this.proj_list.classList.add( 'show' );
+                        this.proj_list.classList.add( 'show-counts' );
+                        this.proj_list.addEventListener( 'animationend', function() {
+                            _this2.status[ 0 ].classList.add( 'show' );
+                            _this2.status[ 0 ].classList.add( 'show-article' );
+                        } );
+                    }
+                    else {
+                        this.status[ 0 ].classList.add( 'show' );
+                        window.scrollTo( 0, 0 );
+                        this.status[ 0 ].classList.add( 'show-article' );
+                    }
+                    break;
+                case 'page2':
+                    page2.classList.add( 'nav-chosen' );
+                    this.status.push( this.learn_path );
+                    if ( window.innerWidth >= 768 ) {
+                        this.learn_list.classList.add( 'show' );
+                        this.learn_list.classList.add( 'show-counts' );
+                        this.learn_list.addEventListener( 'animationend', function() {
+                            _this2.status[ 0 ].classList.add( 'show' );
+                            _this2.status[ 0 ].classList.add( 'show-article' );
+                        } );
+                    }
+                    else {
+                        this.status[ 0 ].classList.add( 'show' );
+                        window.scrollTo( 0, 0 );
+                        this.status[ 0 ].classList.add( 'show-article' );
+                    }
+                    break;
+            }
         }
 
         /**
-         * 视口宽度大于767时的回调函数，一般无必要，为了应对有人在桌面端缩小窗口后点开菜单再拉大窗口，fat同理
+         * 选中三级标题（具体的文章），仅在桌面端有效
+         * @param event {event}
          */
 
         /**
-         * 点击遮罩上的菜单根据锚点跳转，所有的回调函数均统一使用箭头函数以避免 this 意外更改
+         * 导航菜单的事件回调，仅在桌面端有效
          * @param e {event}
          */
 
         /**
-         * The motion when click the top-left box while viewpoint < 767
+         * 页面底部的翻页按钮回调
+         * @param e {event}
          */
 
         /**
-         * 项目总结的收起与打开，总结并不包含图像（也许以后会包含），手动加载是为了让界面看起来更干净。这个函数只提供给 forEach 方法
+         * 项目总结的收起与打开按钮节点的事件绑定函数
          * @param ele {node} DOM 节点数组的元素
          * @param idx {int} index
+         */
+
+        /**
+         * 移动端导航菜单的打开与闭合逻辑
+         */
+
+        /**
+         * 监控视口宽度变化是否跨越阈值。
+         */
+
+        /**
+         * 监控视口宽度变化是否跨越阈值。
+         */
+
+        /**
+         * 移动端导航菜单逻辑
+         * @param e {event}
+         */
+
+        /**
+         * 桌面Safari在animation后经过的地方滚动失效bug修正
          */
 
     }], [{
@@ -166,10 +325,13 @@ var IndexUI = function () {
 
 var UIHandle = new IndexUI();
 UIHandle.toggles.forEach(UIHandle.showDetail);
-UIHandle.rolls.forEach(UIHandle.showDetail);
-UIHandle.menu.addEventListener('click', UIHandle.scroll);
-UIHandle.ext_above.addEventListener('click', UIHandle.navClick);
+UIHandle.flip.addEventListener( 'click', UIHandle.bottomFlip );
+UIHandle.anchor.addEventListener( 'click', UIHandle.pageChoose );
+UIHandle.entry_choose.addEventListener( 'click', UIHandle.itemChoose );
+UIHandle.mob_drawer.addEventListener( 'click', UIHandle.drawerControl );
+UIHandle.mob_nav.addEventListener( 'click', UIHandle.mobSelect );
+UIHandle.flip_learn.addEventListener( 'click', UIHandle.bottomFlip );
+UIHandle.content.addEventListener( 'webkitAnimationEnd', UIHandle.fixSafariScrolling );
 window.addEventListener('resize', UIHandle.slim);
-ajax("GET", "https://www.rustinz.com/Weather", IndexUI.weather);
-ajax("GET", "https://www.rustinz.com/FileSize", IndexUI.fileSize);
+ajax( 'GET', 'https://www.rustinz.com/FileSize', IndexUI.fileSize );
 //# sourceMappingURL=index.js.map

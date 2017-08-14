@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "sources": [
+    "animation.js"
+  ],
+  "names": [
+    "Animation",
+    "add",
+    "element",
+    "from",
+    "to",
+    "direct",
+    "type",
+    "unit",
+    "duration",
+    "timers",
+    "push",
+    "translate",
+    "start",
+    "tick",
+    "i",
+    "timer",
+    "length",
+    "splice",
+    "stop",
+    "timerId",
+    "setInterval",
+    "interval",
+    "clearInterval",
+    "Date",
+    "progress",
+    "cur",
+    "cur_time",
+    "done",
+    "style",
+    "module",
+    "exports"
+  ],
+  "mappings": "AAAA;;;;;;;;;;;;IAGMA,S;AACF,yBAAc;AAAA;;AAAA;;AAAA,aAKdC,GALc,GAKV,UAACC,OAAD,EAASC,IAAT,EAAcC,EAAd,EAAiBC,MAAjB,EAAwBC,IAAxB,EAAsD;AAAA,gBAAzBC,IAAyB,uEAApB,IAAoB;AAAA,gBAAfC,QAAe,uEAAN,GAAM;;AACtD,oBAAQF,IAAR;AACI,qBAAK,WAAL;AACI,0BAAKG,MAAL,CAAYC,IAAZ,CAAiB,MAAKC,SAAL,CAAeT,OAAf,EAAuBC,IAAvB,EAA4BC,EAA5B,EAAgCC,MAAhC,EAAuCE,IAAvC,EAA4CC,QAA5C,CAAjB;AACA;AAHR;AAKA,kBAAKI,KAAL;AACH,SAZa;;AAAA,aAgCdC,IAhCc,GAgCT,YAAK;AACN,gBAAIC,IAAI,CAAR;AACA,gBAAIC,cAAJ;AACA,mBAAOD,IAAI,MAAKL,MAAL,CAAYO,MAAvB,EAA+BF,GAA/B,EAAoC;AAChCC,wBAAQ,MAAKN,MAAL,CAAYK,CAAZ,CAAR;AACA,oBAAI,CAACC,OAAD,IAAY,MAAKN,MAAL,CAAYK,CAAZ,MAAmBC,KAAnC,EAA0C;AACtC,0BAAKN,MAAL,CAAYQ,MAAZ,CAAmBH,GAAnB,EAAwB,CAAxB;AACH;AACD,oBAAI,MAAKL,MAAL,CAAYO,MAAZ,KAAuB,CAA3B,EAA8B;AAC1B,0BAAKE,IAAL;AACH;AACJ;AACJ,SA5Ca;;AAAA,aA8CdN,KA9Cc,GA8CR,YAAK;AACP,gBAAI,CAAC,MAAKO,OAAV,EAAmB;AACf,sBAAKA,OAAL,GAAeC,YAAY,MAAKP,IAAjB,EAAuB,MAAKQ,QAA5B,CAAf;AACH;AACJ,SAlDa;;AAAA,aAoDdH,IApDc,GAoDT,YAAK;AACNI,0BAAc,MAAKH,OAAnB;AACA,kBAAKV,MAAL,GAAc,EAAd;AACA,kBAAKU,OAAL,GAAe,CAAf;AACH,SAxDa;;AACV,aAAKE,QAAL,GAAgB,EAAhB;AACA,aAAKF,OAAL,GAAe,CAAf;AACA,aAAKV,MAAL,GAAc,EAAd;AACH;;;;kCAUSP,O,EAASC,I,EAAMC,E,EAAIC,M,EAAQE,I,EAAMC,Q,EAAU;AACjD,gBAAII,QAAQ,CAAC,IAAIW,IAAJ,EAAb;;AAEA,mBAAO,YAAW;AACd,oBAAIC,iBAAJ;AAAA,oBAAcC,YAAd;AACA,oBAAIC,WAAW,CAAC,IAAIH,IAAJ,EAAhB;AACA,oBAAII,OAAO,IAAX;AACAH,2BAAW,CAACE,WAAWd,KAAZ,IAAqBJ,QAAhC;AACAiB,sBAAM,CAACrB,KAAKD,IAAN,IAAcqB,QAApB;AACA,oBAAIC,OAAOrB,EAAX,EAAe;AACXqB,0BAAMrB,EAAN;AACAuB,2BAAO,KAAP;AACH;AACJzB,wBAAQ0B,KAAR,CAAcvB,MAAd,IAAwBoB,MAAMlB,IAA9B;AACG,uBAAOoB,IAAP;AACH,aAZD;AAaH;;;;;AA6BLE,OAAOC,OAAP,GAAgB,IAAI9B,SAAJ,EAAhB",
+  "file": "animation.js",
+  "sourcesContent": [
+    "\"use strict\"\n\n\nclass Animation {\n    constructor() {\n        this.interval = 13;\n        this.timerId = 0;\n        this.timers = [];\n    }\n    add=(element,from,to,direct,type,unit='px',duration=500)=>{\n        switch (type){\n            case 'translate':\n                this.timers.push(this.translate(element,from,to, direct,unit,duration));\n                break;\n        }\n        this.start();\n    }\n    \n    translate(element, from, to, direct, unit, duration) {\n        let start = +new Date();\n        \n        return function() {\n            let progress, cur;\n            let cur_time = +new Date();\n            let done = true;\n            progress = (cur_time - start) / duration;\n            cur = (to - from) * progress;\n            if (cur >= to) {\n                cur = to;\n                done = false;\n            }\n         element.style[direct] = cur + unit;\n            return done;\n        }\n    }\n       \n    tick=()=> {\n        let i = 0;\n        let timer;\n        for (; i < this.timers.length; i++) {\n            timer = this.timers[i];\n            if (!timer() && this.timers[i] === timer) {\n                this.timers.splice(i--, 1);\n            }\n            if (this.timers.length === 0) {\n                this.stop();\n            }\n        }\n    }\n    \n    start=()=> {\n        if (!this.timerId) {\n            this.timerId = setInterval(this.tick, this.interval);\n        }\n    }\n    \n    stop=()=> {\n        clearInterval(this.timerId);\n        this.timers = [];\n        this.timerId = 0;\n    }\n    \n}\nmodule.exports= new Animation();"
+  ]
+}
