@@ -33,86 +33,88 @@ var IndexUI = function () {
         var _this = this;
 
         (0, _classCallCheck3.default)(this, IndexUI);
-        this.itemChoose = function( event ) {
-            if ( event.target.tagName === 'LI' && !event.target.classList.contains( 'on-top' ) ) {
-                var item = document.querySelector( '#' + event.target.classList[ 0 ] );
-                if ( event.target.parentNode.classList.contains( 'proj-ch' ) ) {
-                    var ele = document.querySelector( '.proj-ch .on-top' );
-                    var article = document.querySelector( '.project.show' );
-                    ele.classList.remove( 'on-top' );
-                    article.classList.remove( 'show' );
-                    article.classList.remove( 'show-counts' );
+
+        this.itemChoose = function (event) {
+            if (event.target.tagName === 'LI' && !event.target.classList.contains('on-top')) {
+                var item = document.querySelector('#' + event.target.classList[0]);
+                if (event.target.parentNode.classList.contains('proj-ch')) {
+                    var ele = document.querySelector('.proj-ch .on-top');
+                    var article = document.querySelector('.project.show');
+                    ele.classList.remove('on-top');
+                    article.classList.remove('show');
+                    article.classList.remove('show-counts');
+                } else if (event.target.parentNode.classList.contains('path-ch')) {
+                    var _ele = document.querySelector('.path-ch .on-top');
+                    var _article = document.querySelector('.stuff.show');
+                    _ele.classList.remove('on-top');
+                    _article.classList.remove('show');
+                    _article.classList.remove('show-counts');
                 }
-                else if ( event.target.parentNode.classList.contains( 'path-ch' ) ) {
-                    var _ele = document.querySelector( '.path-ch .on-top' );
-                    var _article = document.querySelector( '.stuff.show' );
-                    _ele.classList.remove( 'on-top' );
-                    _article.classList.remove( 'show' );
-                    _article.classList.remove( 'show-counts' );
-                }
-                event.target.classList.add( 'on-top' );
-                item.classList.add( 'show' );
-                item.classList.add( 'show-counts' );
+                event.target.classList.add('on-top');
+                item.classList.add('show');
+                item.classList.add('show-counts');
             }
         };
-        this.pageChoose = function( e ) {
-            if ( e.target.tagName === 'LI' ) {
-                _this.showPage( e.target.id );
+
+        this.pageChoose = function (e) {
+            if (e.target.tagName === 'LI') {
+                _this.showPage(e.target.id);
             }
         };
-        this.bottomFlip = function( e ) {
-            switch ( e.target.className ) {
+
+        this.bottomFlip = function (e) {
+            switch (e.target.className) {
                 case 'flip-over':
-                    _this.showPage( 'page1' );
+                    _this.showPage('page1');
                     break;
                 case 'flip-over-learn':
-                    _this.showPage( 'page2' );
+                    _this.showPage('page2');
                     break;
             }
         };
-        this.showDetail = function( ele, idx ) {
-            ele.addEventListener( 'click', function( e ) {
-                if ( window.innerWidth < 768 ) {
-                    window.scrollBy( 0, -parseInt( window.getComputedStyle( _this.texts[ idx ] ).getPropertyValue( 'height' ) ) );
+
+        this.showDetail = function (ele, idx) {
+            ele.addEventListener('click', function (e) {
+                if (window.innerWidth < 768) {
+                    window.scrollBy(0, -parseInt(window.getComputedStyle(_this.texts[idx]).getPropertyValue('height')));
                 }
-                _this.projects[ idx ].classList.toggle( 'show-text' );
-                if ( _this.projects[ idx ].classList.contains( 'show-text' ) ) {
-                    _this.texts[ idx ].classList.toggle( 'expand' );
-                    _this.toggles[ idx ].innerHTML = '<<收起';
+                _this.projects[idx].classList.toggle('show-text');
+                if (_this.projects[idx].classList.contains('show-text')) {
+                    _this.texts[idx].classList.toggle('expand');
+                    _this.toggles[idx].innerHTML = '<<收起';
+                } else {
+                    _this.texts[idx].classList.toggle('expand');
+                    _this.toggles[idx].innerHTML = '>>更多';
                 }
-                else {
-                    _this.texts[ idx ].classList.toggle( 'expand' );
-                    _this.toggles[ idx ].innerHTML = '>>更多';
-                }
-            } );
+            });
         };
-        this.drawerControl = function() {
-            if ( !_this.content.classList.contains( 'block-scroll' ) ) {
-                _this.content.classList.add( 'show-menu' );
-                _this.mob.classList.add( 'show-menu' );
-                _this.content.classList.add( 'block-scroll' );
-            }
-            else {
-                _this.content.classList.remove( 'show-menu' );
-                _this.mob.classList.remove( 'show-menu' );
-                _this.content.classList.remove( 'block-scroll' );
+
+        this.drawerControl = function () {
+            if (!_this.content.classList.contains('block-scroll')) {
+                _this.content.classList.add('show-menu');
+                _this.mob.classList.add('show-menu');
+                _this.content.classList.add('block-scroll');
+            } else {
+                _this.content.classList.remove('show-menu');
+                _this.mob.classList.remove('show-menu');
+                _this.content.classList.remove('block-scroll');
             }
         };
 
         this.slim = function () {
             if (innerWidth > 767) {
-                _this.content.classList.remove( 'show-menu' );
-                _this.mob.classList.remove( 'show-menu' );
-                _this.content.classList.remove( 'block-scroll' );
-                switch ( _this.status[ 0 ].id ) {
+                _this.content.classList.remove('show-menu');
+                _this.mob.classList.remove('show-menu');
+                _this.content.classList.remove('block-scroll');
+                switch (_this.status[0].id) {
                     case 'info':
-                        _this.showPage( 'page0' );
+                        _this.showPage('page0');
                         break;
                     case 'project_item':
-                        _this.showPage( 'page1' );
+                        _this.showPage('page1');
                         break;
                     case 'learn':
-                        _this.showPage( 'page2' );
+                        _this.showPage('page2');
                         break;
                 }
                 window.removeEventListener('resize', _this.slim);
@@ -126,51 +128,54 @@ var IndexUI = function () {
                 window.addEventListener('resize', _this.slim);
             }
         };
-        this.mobSelect = function( e ) {
-            var target = document.querySelector( '#' + e.target.classList[ 0 ] );
+
+        this.mobSelect = function (e) {
+            var target = document.querySelector('#' + e.target.classList[0]);
             if (e.target.tagName === 'LI') {
-                if ( !target.classList.contains( 'show' ) ) {
+                if (!target.classList.contains('show')) {
                     var last = _this.status.shift();
-                    last.classList.remove( 'show' );
-                    last.classList.remove( 'show-article' );
-                    target.classList.add( 'show' );
-                    _this.status.push( target );
-                    window.scrollTo( 0, 0 );
+                    last.classList.remove('show');
+                    last.classList.remove('show-article');
+                    target.classList.add('show');
+                    _this.status.push(target);
+                    window.scrollTo(0, 0);
                 }
             }
             _this.drawerControl();
         };
-        this.fixSafariScrolling = function() {
-            if ( window.innerWidth < 768 ) {
+
+        this.fixSafariScrolling = function () {
+            if (window.innerWidth < 768) {
                 _this.content.style.overflowY = 'hidden';
-                setTimeout( function() {
+                setTimeout(function () {
                     _this.content.style.overflowY = 'scroll';
-                }, 0 );
+                }, 0);
             }
         };
-        this.toggles = (0, _from2.default)( document.querySelectorAll( '.toggle-text' ) ); // Edge 的 forEach 不支持类数组，转换成数组或许也有性能上的优势
+
+        this.toggles = (0, _from2.default)(document.querySelectorAll('.toggle-text')); // Edge 的 forEach 不支持类数组，转换成数组或许也有性能上的优势
         this.texts = (0, _from2.default)(document.querySelectorAll('.text-box')); // Array.from 兼容性很差，必须要 Babel 的 'transfer-runtime' 插件
-        this.proj_container = document.querySelector( '#project_item' );
-        this.learn_path = document.querySelector( '#learn' );
-        this.info_page = document.querySelector( '.information-page' );
-        this.flip = document.querySelector( '.flip-over' );
-        this.entry_choose = document.querySelector( '.entry-choose' );
-        this.anchor = document.querySelector( '.anchor' );
-        this.projects = (0, _from2.default)( document.querySelectorAll( '.project' ) );
-        this.stuff = (0, _from2.default)( document.querySelectorAll( '.stuff' ) );
+        this.proj_container = document.querySelector('#project_item');
+        this.learn_path = document.querySelector('#learn');
+        this.info_page = document.querySelector('.information-page');
+        this.flip = document.querySelector('.flip-over');
+        this.entry_choose = document.querySelector('.entry-choose');
+        this.anchor = document.querySelector('.anchor');
+        this.projects = (0, _from2.default)(document.querySelectorAll('.project'));
+        this.stuff = (0, _from2.default)(document.querySelectorAll('.stuff'));
         this.nav = document.querySelector('.nav');
         this.weather = document.querySelector('.weather');
         this.html = document.querySelector('html');
-        this.proj_list = document.querySelector( '.proj-ch' );
-        this.learn_list = document.querySelector( '.path-ch' );
-        this.proj_entries = (0, _from2.default)( document.querySelectorAll( '.proj-ch .entry-chosen' ) );
-        this.learn_entries = (0, _from2.default)( document.querySelectorAll( '.path-ch .entry-chosen' ) );
-        this.status = [ this.info_page ];
-        this.mob_drawer = document.querySelector( '.menu-button' );
-        this.content = document.querySelector( '.content' );
-        this.mob_nav = document.querySelector( '.nav-menu-mobile' );
-        this.flip_learn = document.querySelector( '.flip-over-learn' );
-        this.mob = document.querySelector( '.nav-mobile' );
+        this.proj_list = document.querySelector('.proj-ch');
+        this.learn_list = document.querySelector('.path-ch');
+        this.proj_entries = (0, _from2.default)(document.querySelectorAll('.proj-ch .entry-chosen'));
+        this.learn_entries = (0, _from2.default)(document.querySelectorAll('.path-ch .entry-chosen'));
+        this.status = [this.info_page];
+        this.mob_drawer = document.querySelector('.menu-button');
+        this.content = document.querySelector('.content');
+        this.mob_nav = document.querySelector('.nav-menu-mobile');
+        this.flip_learn = document.querySelector('.flip-over-learn');
+        this.mob = document.querySelector('.nav-mobile');
     }
 
     /**
@@ -190,60 +195,59 @@ var IndexUI = function () {
          * @param id {string} 标记页码的id
          * @returns {*} 无返回值
          */
-        value: function showPage( id ) {
+        value: function showPage(id) {
             var _this2 = this;
-            if ( window.innerWidth >= 768 ) {
-                if ( document.querySelector( '#' + id ).classList.contains( 'nav-chosen' ) ) return void 0;
-                document.querySelector( '.nav-chosen' ).classList.remove( 'nav-chosen' );
+
+            if (window.innerWidth >= 768) {
+                if (document.querySelector('#' + id).classList.contains('nav-chosen')) return void 0;
+                document.querySelector('.nav-chosen').classList.remove('nav-chosen');
             }
             this.status.shift();
-            (0, _from2.default)( document.querySelectorAll( '.projects-container.show,.information-page.show,.path.show,.proj-ch.show,.path-ch.show' ) ).forEach( function( e ) {
-                e.classList.remove( 'show' ); // IE not support multiple classes one time
-                e.classList.remove( 'show-counts' );
-                e.classList.remove( 'show-article' );
-            } );
-            (0, _from2.default)( document.querySelectorAll( '.show-counts' ) ).forEach( function( e ) {
-                e.classList.remove( 'show-counts' );
-            } );
-            switch ( id ) {
+            (0, _from2.default)(document.querySelectorAll('.projects-container.show,.information-page.show,.path.show,.proj-ch.show,.path-ch.show')).forEach(function (e) {
+                e.classList.remove('show'); // IE not support multiple classes one time
+                e.classList.remove('show-counts');
+                e.classList.remove('show-article');
+            });
+            (0, _from2.default)(document.querySelectorAll('.show-counts')).forEach(function (e) {
+                e.classList.remove('show-counts');
+            });
+            switch (id) {
                 case 'page0':
-                    this.status.push( this.info_page );
-                    this.status[ 0 ].classList.add( 'show' );
-                    this.status[ 0 ].classList.add( 'show-article' );
-                    page0.classList.add( 'nav-chosen' );
+                    this.status.push(this.info_page);
+                    this.status[0].classList.add('show');
+                    this.status[0].classList.add('show-article');
+                    page0.classList.add('nav-chosen');
                     break;
                 case 'page1':
-                    page1.classList.add( 'nav-chosen' );
-                    this.status.push( this.proj_container );
-                    if ( window.innerWidth >= 768 ) {
-                        this.proj_list.classList.add( 'show' );
-                        this.proj_list.classList.add( 'show-counts' );
-                        this.proj_list.addEventListener( 'animationend', function() {
-                            _this2.status[ 0 ].classList.add( 'show' );
-                            _this2.status[ 0 ].classList.add( 'show-article' );
-                        } );
-                    }
-                    else {
-                        this.status[ 0 ].classList.add( 'show' );
-                        window.scrollTo( 0, 0 );
-                        this.status[ 0 ].classList.add( 'show-article' );
+                    page1.classList.add('nav-chosen');
+                    this.status.push(this.proj_container);
+                    if (window.innerWidth >= 768) {
+                        this.proj_list.classList.add('show');
+                        this.proj_list.classList.add('show-counts');
+                        this.proj_list.addEventListener('animationend', function () {
+                            _this2.status[0].classList.add('show');
+                            _this2.status[0].classList.add('show-article');
+                        });
+                    } else {
+                        this.status[0].classList.add('show');
+                        window.scrollTo(0, 0);
+                        this.status[0].classList.add('show-article');
                     }
                     break;
                 case 'page2':
-                    page2.classList.add( 'nav-chosen' );
-                    this.status.push( this.learn_path );
-                    if ( window.innerWidth >= 768 ) {
-                        this.learn_list.classList.add( 'show' );
-                        this.learn_list.classList.add( 'show-counts' );
-                        this.learn_list.addEventListener( 'animationend', function() {
-                            _this2.status[ 0 ].classList.add( 'show' );
-                            _this2.status[ 0 ].classList.add( 'show-article' );
-                        } );
-                    }
-                    else {
-                        this.status[ 0 ].classList.add( 'show' );
-                        window.scrollTo( 0, 0 );
-                        this.status[ 0 ].classList.add( 'show-article' );
+                    page2.classList.add('nav-chosen');
+                    this.status.push(this.learn_path);
+                    if (window.innerWidth >= 768) {
+                        this.learn_list.classList.add('show');
+                        this.learn_list.classList.add('show-counts');
+                        this.learn_list.addEventListener('animationend', function () {
+                            _this2.status[0].classList.add('show');
+                            _this2.status[0].classList.add('show-article');
+                        });
+                    } else {
+                        this.status[0].classList.add('show');
+                        window.scrollTo(0, 0);
+                        this.status[0].classList.add('show-article');
                     }
                     break;
             }
@@ -325,13 +329,13 @@ var IndexUI = function () {
 
 var UIHandle = new IndexUI();
 UIHandle.toggles.forEach(UIHandle.showDetail);
-UIHandle.flip.addEventListener( 'click', UIHandle.bottomFlip );
-UIHandle.anchor.addEventListener( 'click', UIHandle.pageChoose );
-UIHandle.entry_choose.addEventListener( 'click', UIHandle.itemChoose );
-UIHandle.mob_drawer.addEventListener( 'click', UIHandle.drawerControl );
-UIHandle.mob_nav.addEventListener( 'click', UIHandle.mobSelect );
-UIHandle.flip_learn.addEventListener( 'click', UIHandle.bottomFlip );
-UIHandle.content.addEventListener( 'webkitAnimationEnd', UIHandle.fixSafariScrolling );
+UIHandle.flip.addEventListener('click', UIHandle.bottomFlip);
+UIHandle.anchor.addEventListener('click', UIHandle.pageChoose);
+UIHandle.entry_choose.addEventListener('click', UIHandle.itemChoose);
+UIHandle.mob_drawer.addEventListener('click', UIHandle.drawerControl);
+UIHandle.mob_nav.addEventListener('click', UIHandle.mobSelect);
+UIHandle.flip_learn.addEventListener('click', UIHandle.bottomFlip);
+UIHandle.content.addEventListener('webkitAnimationEnd', UIHandle.fixSafariScrolling);
 window.addEventListener('resize', UIHandle.slim);
-ajax( 'GET', 'https://www.rustinz.com/FileSize', IndexUI.fileSize );
+ajax('GET', 'https://www.rustinz.com/FileSize', IndexUI.fileSize);
 //# sourceMappingURL=index.js.map

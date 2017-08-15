@@ -23,7 +23,6 @@ html
     position: relative
     width: 100%
     height: 100%
-    padding-left: 5px
     margin: 0 auto
     font-size: 62.5%
     // 默认，方便计算
@@ -38,11 +37,12 @@ html
         font-size: 22px
     @media screen and (min-width: 720px) and (max-width: 749px)
         font-size: 24.5px
-    @media screen and (min-width: 750px) and (max-width: 767px)
+    @media screen and (min-width: 750px) and (max-width: 799px)
         font-size: 25.5px
-    @media only screen and (max-width: 767px)
+    @media screen and (max-width: 799px)
         padding: 0
         height: auto
+
 
 body
     position: relative
@@ -52,21 +52,25 @@ body
     max-width: 111vh
     padding-left: 5px
     margin: 0 auto
-    font-size: 1.4rem
     overflow: hidden
+    font-size: 1.4rem
     color: rgba(255, 255, 255, .30)
     font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Micro Hei, Arial, sans-serif
     background: url("../images/pc/bg.png") 0 0 no-repeat fixed
     background-size: cover
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
     -webkit-text-size-adjust: 100% !important
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         padding: 0
         height: auto
         font-size: 1rem
         overflow-x: hidden
         overflow-y: scroll
-
+        background: url("../images/phone/bg_phone.png") 0 0
+        background-size: cover
+        -webkit-background-size: cover
+    @media screen and (min-width: 800px) and (max-width: 850px)
+        overflow: scroll
 .content
     position: relative
     width: 100%
@@ -77,7 +81,7 @@ body
     -ms-transition: 0.3s
     -o-transition: 0.3s
     transition: 0.3s
-    @media only screen and (min-width: 768px)
+    @media only screen and (min-width: 800px)
         position: static
         width: auto
         float: none
@@ -97,14 +101,14 @@ body
     color: #fff
     background: rgba(0, 0, 0, .5)
     z-index: 999
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         display: none
     .nav-menu
         position: relative
         width: 112vh
         margin: 0 auto
         height: 7.4vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             display: none
     .anchor
         position: absolute
@@ -144,7 +148,7 @@ body
     transition: 0.3s
     -webkit-backface-visibility: hidden
     backface-visibility: hidden
-    @media only screen and (min-width: 768px)
+    @media only screen and (min-width: 800px)
         display: none
     .nav-menu-mobile
         li
@@ -157,7 +161,7 @@ body
 
 .menu-button
     display: none
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         display: block
         position: absolute
         top: 2.25rem
@@ -175,25 +179,23 @@ body
     height: 92.6vh
     -webkit-backface-visibility: hidden
     backface-visibility: hidden
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         padding-left: 1.5rem
         height: 100vh
         width: 100%
-        background: url("../images/phone/bg_phone.png") 0 0
-        background-size: cover
-        -webkit-background-size: cover
+
 
 .head
     position: relative
     box-sizing: border-box
     top: 24.44vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         top: 19.3rem
     .occupation
         font-size: 1.8rem
         line-height: 1
         margin-bottom: 2.77vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             font-size: 1rem
             line-height: 1
             margin-bottom: 1.5rem
@@ -202,19 +204,19 @@ body
         color: #fff
         line-height: 4.44vh
         margin-bottom: 2.77vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             font-size: 2.4rem
             line-height: 1
             margin-bottom: 1.3rem
     img
         margin-right: 4px
         vertical-align: middle
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             width: 1rem
             height: 1rem
     span
         margin-right: 30px
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             display: block
             margin-bottom: 1.5rem
             line-height: 0
@@ -222,19 +224,19 @@ body
 .introduce
     position: absolute
     top: 43.518vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         top: 31.3rem
     .curtain-title
         font-size: 1.8rem
         margin-bottom: 1.574vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             font-size: 1.3rem
             line-height: 1
             margin-bottom: .85rem
     p
         line-height: 3.7vh
         text-align: left
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             line-height: 1.8rem
 
 .footer
@@ -242,7 +244,7 @@ body
     bottom: 4.629vh
     left: 50%
     transform: translate(-50%)
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         top: 48.2rem
 
 .projects-container, .path
@@ -257,7 +259,7 @@ body
     -webkit-backface-visibility: hidden
     backface-visibility: hidden
     z-index: 2
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         position: relative
         top: 0
         left: 0
@@ -275,7 +277,7 @@ body
     -webkit-backface-visibility: hidden
     backface-visibility: hidden
     z-index: 10
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         position: relative
         display: block
         width: 100%
@@ -290,7 +292,7 @@ body
     font-size: 1.8rem
     color: #fff
     line-height: 1
-    @media only screen and (min-width: 768px)
+    @media only screen and (min-width: 800px)
         display: none
 
 .project-title, .stuff-title
@@ -299,7 +301,7 @@ body
     line-height: 3.333vh
     width: 100%
     margin-bottom: 9vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         font-size: 1.8rem
         margin-bottom: 3rem
         line-height: 1
@@ -309,7 +311,7 @@ body
         vertical-align: middle
         margin-right: 1rem
         margin-bottom: 5px
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             height: 1.8rem
     a
         color: #fff
@@ -317,17 +319,17 @@ body
 .jump
     line-height: 1.3vh
     margin-bottom: 5.555vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         line-height: 1
         margin-bottom: 3rem
     a
         margin-right: 3.704vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             margin-right: 1.5rem
     .phone
         position: relative
         color: #9f8234
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             display: none
         &:hover
             text-decoration: underline
@@ -359,7 +361,7 @@ body
         padding-left: 5px
         margin-bottom: 1.574vh
         border-left: 1px solid
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             font-size: 1.3rem
             border-left: 1px solid
             padding-left: .9rem
@@ -370,39 +372,39 @@ body
         width: 100%
         text-align: justify
         padding-right: 10px
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             line-height: 2rem
             margin-bottom: 2.75rem
             padding-right: 0
     li
         line-height: 3.7vh
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             line-height: 2rem
 
 .text-box
     height: 13.5vh
     overflow: hidden
     margin-bottom: 2vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         height: 12.4rem
         margin-bottom: 5rem
     p
         margin: 0
         text-align: justify
         padding-right: 17px
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             padding-right: .5rem
     figure
         width: 100%
         margin: 10px 5px
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 799px)
             margin: .5rem 0
         img
             width: 98%
         figcaption
             text-align: center
             font-size: 12px
-            @media only screen and (max-width: 767px)
+            @media only screen and (max-width: 799px)
                 font-size: .75rem
 
 .code
@@ -414,7 +416,7 @@ body
     right: 15px
     bottom: -6px
     z-index: 5
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         right: .75rem
         bottom: -2rem
     &:hover
@@ -424,7 +426,7 @@ body
 .stuff-size
     float: right
     margin-right: 15px
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         margin-right: .5rem
 
 .show
@@ -432,7 +434,7 @@ body
 
 .show-text
     top: -44.5vh !important
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         top: auto !important
 
 .expand
@@ -440,7 +442,7 @@ body
     overflow-y: scroll
     overflow-x: hidden
     color: #fff
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         height: auto
         overflow: hidden
 
@@ -449,7 +451,7 @@ body
     top: 31.666vh
     -webkit-backface-visibility: hidden
     backface-visibility: hidden
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         display: none !important
 
 .entry-chosen
@@ -479,7 +481,7 @@ body
 .flip-over
     position: absolute
     top: 70.83vh
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         top: 41rem
         left: 1.5rem
     &:hover
@@ -493,7 +495,7 @@ body
     &:hover
         cursor: pointer
         color: #fff
-    @media only screen and (max-width: 767px)
+    @media only screen and (max-width: 799px)
         position: absolute
         top: auto
         left: auto

@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        (function( i, s, o, g, r, a, m ) {
+            i[ 'GoogleAnalyticsObject' ] = r;
+            i[ r ] = i[ r ] || function() {
+                (i[ r ].q = i[ r ].q || []).push( arguments );
+            }, i[ r ].l = 1 * new Date();
+            a = s.createElement( o ),
+            m = s.getElementsByTagName( o )[ 0 ];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore( a, m );
+        })( window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga' );
+        ga( 'create', 'UA-104214934-1', 'auto' );
+        ga( 'send', 'pageview' );
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement( 'script' );
+            hm.src = 'https://hm.baidu.com/hm.js?3b5abc0dc922e24efdbb5ef2be520433';
+            var s = document.getElementsByTagName( 'script' )[ 0 ];
+            s.parentNode.insertBefore( hm, s );
+        })();
+    </script>
     <meta charset = "UTF-8">
     <meta name = "author" content = "Rustin Zhang">
     <meta name = "Keywords" content = "personal website, frontend, programmer, writer, 个人主页, Rustin Zhang, 前端，程序员, 写作">
@@ -56,11 +80,12 @@
                 </aside>
                 <section class = "project-tech-stack">
                     <h3>技能关键词</h3>
-                    <p>JavaScript/Sass/HTML | 模块化 | 剪枝/历史启发/置换表 | Gulp/Webpack/Babel</p>
+                    <p>JavaScript(ES6+)/Sass/HTML | 模块化 | Gulp/Webpack/Babel</p>
                 </section>
                 <section class = "project-brief">
                     <h3>简介</h3>
-                    <p>一个带有基本行棋能力AI的网页版五子棋，考虑到应用规模，采用了面向对象和模块化技术；博弈AI使用了基本的空窗搜索+历史启发+置换表提升效率。</p></section>
+                    <p>一个带有基本行棋能力AI的网页版五子棋，考虑到应用规模，采用了面向对象和模块化技术；兼容PC端和移动端；做这个项目的目的是提高ES6的熟悉程度以及更进一步掌握JavaScript。</p>
+                </section>
                 <section class = "project-detail">
                     <header>
                         <h3>总结</h3>
@@ -132,13 +157,13 @@
                 </aside>
                 <section class = "project-tech-stack">
                     <h3>技能关键词</h3>
-                    <p>JavaScript/Sass/HTML | Nginx/Node.js/反向代理 | 模块化 | Gulp/Webpack/Babel </p>
+                    <p>JavaScript(ES6+)/Sass/HTML | Nginx/Node.js/反向代理 | 模块化 | Gulp/Webpack/Babel </p>
                 </section>
                 <section class = "project-brief">
                     <h3>简介</h3>
                     <p>
-                        即本页面，除简介和联系方式外，目前有“项目展示”以及“学习心得”两个板块，预计后续添加原创以及影像模块。技术方面，以屏幕宽度768px为阈值大致分为桌面端、移动端两种版式；依托腾讯云主机，采用Nginx
-                        为静态服务器，其他请求反向代理给Node.js 处理；通过301永久迁移实现全站HTTPS 连接。目前服务器在香港。</p></section>
+                        即本页面，除简介和联系方式外，目前有“项目展示”以及“学习心得”两个板块。技术方面，以屏幕宽度800px为阈值分为桌面端、移动端两种版式；采用Nginx为静态服务器，其他请求反向代理给Node.js
+                        处理；通过301实现全站HTTPS连接。前后端沟通API参考REST风格。</p></section>
                 <section class = "project-detail">
                     <header>
                         <h3>总结</h3>
@@ -171,65 +196,9 @@
                            被应用市场限制。原本打算做自签名证书，但腾讯送了一年证书，就省了一个步骤。余下只要更改Nginx的配置，再设定301跳转就好（让访客手输HTTPS或者443不现实，不设置的话HTTPS形同虚设），不再赘述。</p>
                         <p>至此服务端就基本上完成了，感觉只能算是对 node 有了表面上的认识，不过有了操作经验，再看文档的认识会更深刻。</p>
                         <p>
-                            网站初起，需要缓慢地迭代，目前的客户端逻辑非常直白。自己简单封装了一个AJAX类再将DOM操作封装了一个类，加了几个监听器就结束了。因为和服务端约定好了接口，所以预计扩展起来比较方便。但想必在请求很多的情况下无法像现在这样使用静态路由，考虑的方法是将来换成正则筛选。而且当下仅有两张图片加起来不到200KB，本来想娱乐一下懒加载，发现也没有必要多一次AJAX。</p>
-                        <p>
-                            当然虽然逻辑简单，麻烦却不会少，比如现在打开的这个文章，是通过点击事件改编高度实现的，但打开没有问题，点击下方按钮收起的时候由于已经下滑了一段距离，如果不加一个滚动事件返回，收起后原来屏幕正中的内容就会显得偏离了（或许有更好的方法？如果你知道一定要告诉我）。又例如视口宽度小于768px
-                            时的导航菜单打开按钮，用了四个span叠在一起才实现旋转打开（没错，就是Apple首页带的坏头），不知这种为了外观牺牲HTML结构语义性的动画是否值得，毕竟即使是CSS
-                            动画也会浪费性能，但就是好看啊，所以我还是保留了。以及在安卓UC 浏览器上打开时JS全部失效的怪事，后来发现是少给Babel装了一个插件，Array.from()
-                            方法没有被编译……UC的兼容性还比不上微信自带的浏览器。不过 Edge 不能对DOM元素组使用forEach倒是可以理解，我反思了一下这样对性能或许不太友好。</p>
-                        <p>网站的下一步是增加一个主观性更强专开脑洞的文字板块，以及一个图文板块。评论区和会员注册似乎没有必要，自娱自乐就好。</p>
+                            网站初起，需要缓慢地迭代，目前的客户端逻辑非常直白。自己简单封装了一个AJAX类再将DOM操作封装了一个类，加了几个监听器就结束了。因为和服务端约定好了接口，所以预计扩展起来比较方便。但想必在请求很多的情况下无法像现在这样使用静态路由，考虑的方法是将来换成正则筛选。</p>
+                        <p>网站的下一步是使用vue重构方便以后扩展</p>
                         <p>完</p>
-                    </div>
-                </section>
-                <div class = "toggle-text">更多>></div>
-            </article>
-            <article id = "proj2" class = "project">
-                <span class = "count">P[2]</span>
-                <h3 class = "project-title">番茄工作法计时器<span><img src = "images/pc/pc.png"></span></h3>
-                <aside class = "jump">
-                    <a href = "https://www.rustinz.com/pomodoro.html" target = "_blank" class = "run">点我立即运行</a>
-                    <span class = "phone">暂未适配移动端<img src = ""></span>
-                </aside>
-                <section class = "project-tech-stack">
-                    <h3>技能关键词</h3>
-                    <p>JavaScript/Sass/HTML</p>
-                </section>
-                <section class = "project-brief">
-                    <h3>简介</h3>
-                    <p>一个可以自动切换休息时间和工作时间，并可定制休息和工作时长的Web App。本应用主要是jQuery中动画事件池的简单模拟。</p></section>
-                <section class = "project-detail">
-                    <header>
-                        <h3>总结</h3>
-                    </header>
-                    <div class = "text-box">
-                        <p>这个项目是Free Code Camp前端高阶项目中的一个,要求并不高，要实现倒计时还是比较简单的。但因为那时读了一点jQuery
-                           源码，对其中动画模块将所有动画对象推进一个队列（动画事件池，其实浏览器主进程和Node.js也采用了事件池）很着迷，于是这里面的所有动画也用原生JS实现了一遍。虽然功能上都没有问题，但是代码风格比较原始，用一个自执行匿名函数封装成单独模块，里面再没有什么层次。</p>
-                    </div>
-                </section>
-                <div class = "toggle-text">更多>></div>
-            </article>
-            <article id = "proj3" class = "project">
-                <span class = "count">P[3]</span>
-                <h3 class = "project-title">仿Mac计算器<span><img src = "images/pc/pc.png"> </span></h3>
-                <aside class = "jump">
-                    <a href = "https://www.rustinz.com/calculator.html" target = "_blank" class = "run">点我立即运行</a>
-                    <span class = "phone">暂未适配移动端<img src = ""></span>
-                </aside>
-                <section class = "project-tech-stack">
-                    <h3>技能关键词</h3>
-                    <p>JavaScript/Sass/HTML</p>
-                </section>
-                <section class = "project-brief">
-                    <h3>简介</h3>
-                    <p>一个可以连续运算的JS计算器，高度模拟Mac计算器，可响应键盘，位数超过屏幕容纳范围时自动缩小字体</p></section>
-                <section class = "project-detail">
-                    <header>
-                        <h3>总结</h3>
-                    </header>
-                    <div class = "text-box">
-                        <p>计算器算是一些框架"Hello
-                           world"级别的练手项目，对原生JS和CSS来说难度稍有增加但仍属非常简单的范畴。主要的业务逻辑难点在于区分连续运算（比如：3+5-6+8，也就是一直不按等号，或者区分按了等号后马上按运算符和数字）和分词运算；另外还需要优化小数精度，因为JS是二进制精度小数，所以会有误差，处理手段是只要出现小数就转换成整数再做运算。</p>
-                        <p>这是我第一个稍有业务逻辑的练手项目，也是第一次先写sass再编译。</p>
                     </div>
                 </section>
                 <div class = "toggle-text">更多>></div>
@@ -337,8 +306,6 @@
         <ul class = "proj-ch">
             <li class = "proj0 entry-chosen on-top">01</li>
             <li class = "proj1 entry-chosen">02</li>
-            <li class = "proj2 entry-chosen">03</li>
-            <li class = "proj3 entry-chosen">04</li>
         </ul>
         <ul class = "path-ch">
             <li class = "book0 entry-chosen on-top">01</li>

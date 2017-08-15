@@ -10,10 +10,11 @@
  * Ajax类
  */
 
-var _classCallCheck2 = require( 'babel-runtime/helpers/classCallCheck' );
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-var _createClass2 = require( 'babel-runtime/helpers/createClass' );
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -51,10 +52,10 @@ var Ajax = function () {
 
 
     (0, _createClass3.default)(Ajax, [{
-        key  : 'write',
+        key: 'write',
         value: function write(method, url, data) {
             this.req.open(method.toUpperCase(), url);
-            if ( method.toLowerCase() === 'post' ) {
+            if (method.toLowerCase() === 'post') {
                 this.req.send(data);
             } else {
                 this.req.send();
@@ -70,7 +71,7 @@ var Ajax = function () {
          */
 
     }, {
-        key  : 'request',
+        key: 'request',
         value: function request(method, url, callback, data) {
             var _this = this;
 
